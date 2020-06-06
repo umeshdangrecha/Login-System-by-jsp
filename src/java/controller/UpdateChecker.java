@@ -37,12 +37,14 @@ public class UpdateChecker extends HttpServlet {
         User user = new User(fname, lname, username, password, city, state, zip);
         HttpSession session = req.getSession();
         
+        PrintWriter out = resp.getWriter();
         if(CheckUser.checkUser(user,confirmPassword)){
-//            MyDb.openConnection();
-            System.out.println(MyDb.updateUser(user,(int)session.getAttribute("id")));
-//            MyDb.closeConnection();
+            MyDb.updateUser(user,(int)session.getAttribute("id"));
+            out.write("Success");
         }
-        resp.sendRedirect("update.jsp");
+        else{
+            out.write("Failed");
+        }
         
     }
 

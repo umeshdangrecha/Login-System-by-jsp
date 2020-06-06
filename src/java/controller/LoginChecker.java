@@ -25,17 +25,17 @@ public class LoginChecker extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        PrintWriter out = resp.getWriter();
            
         int id = CheckUser.checkLogin(username, password);
         if(id!=-1){
             HttpSession session = req.getSession();
             session.setAttribute("username", username);
             session.setAttribute("id", id);
-            
             resp.sendRedirect("index.jsp");
         }
         else{
-           resp.sendRedirect("login.html"); 
+            out.write("Login Failed");
         }
     }
 

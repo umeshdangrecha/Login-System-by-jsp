@@ -8,6 +8,7 @@ package controller;
 import db.MyDb;
 import dto.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,15 +32,18 @@ public class registrationChecker extends HttpServlet {
         String state = req.getParameter("state");
         String zip = req.getParameter("zip");
         System.out.println(fname);
+        
+        PrintWriter out = resp.getWriter();
         User user = new User(fname, lname, username, password, city, state, zip);
         
         if(CheckUser.checkUser(user,confirmPassword)){
-//            MyDb.openConnection();
-            System.out.println(MyDb.registerUser(user));
-//            MyDb.closeConnection();
+            MyDb.registerUser(user);
+            
+        out.write("Success");
         }
-        resp.sendRedirect("registration.html");
-        
+        else{
+            out.write("Failed");
+        }
     }
 
     @Override

@@ -25,25 +25,48 @@
     </div>
     <h1>Login Here</h1>
     <div class="container mt-5">
-        <form method="POST" action="LoginChecker">
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
               <label for="Password">Password</label>
-              <input type="password" class="form-control" name="password">
+              <input type="password" class="form-control" name="password" id="password" >
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
     </div>
+    <script src="./jqueryCdn.js"></script>
     <script src="./myJs.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#submitBtn").click(function(){
+                let username = $("#username").val();
+                let password = $("#password").val();
+                $.ajax({
+
+                    method:"POST",
+                    url:"LoginChecker",
+                    data:{
+                        username:username,
+                        password:password
+                    },
+                    success:function(data){
+                        alert(data);
+                    }
+                });
+            });
+            
+        });
+        
+    </script>
     <script src="jquery1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="jquery2.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        
 </body>
 
 </html>

@@ -34,15 +34,14 @@
         User user = MyDb.getUser(id);
         
     %>
-    <form class="needs-validation" method="POST" action="UpdateChecker">
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label for="validationTooltip01">First name</label>
-            <input type="text" class="form-control" name="fname"  placeholder="First name" value="<%=user.getFirstName()%>" required>
+            <input type="text" class="form-control" id="fname"  placeholder="First name" value="<%=user.getFirstName()%>" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="validationTooltip02">Last name</label>
-            <input type="text" class="form-control" name="lname" placeholder="Last name" value="<%=user.getLastName()%>" required>
+            <input type="text" class="form-control" id="lname" placeholder="Last name" value="<%=user.getLastName()%>" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="validationTooltipUsername">Username</label>
@@ -50,40 +49,78 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
               </div>
-              <input type="text" class="form-control" name="username" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" value="<%=user.getUsername()%>" required>
+              <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" value="<%=user.getUsername()%>" required>
             </div>
           </div>
         </div>
         <div class="form-row">
            <div class="col-md-6 mb-3">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password"  required>
+            <input type="password" class="form-control" id="password" placeholder="Password"  required>
           </div>
             <div class="col-md-6 mb-3">
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"  required>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"  required>
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="validationTooltip03">City</label>
-            <input type="text" class="form-control" name="city" placeholder="City" value="<%=user.getCity()%>" required>
+            <input type="text" class="form-control" id="city" placeholder="City" value="<%=user.getCity()%>" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="validationTooltip04">State</label>
-            <input type="text" class="form-control" name="state" placeholder="State" value="<%=user.getState()%>" required>
+            <input type="text" class="form-control" id="state" placeholder="State" value="<%=user.getState()%>" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="validationTooltip05">Zip</label>
-            <input type="number" class="form-control" name="zip" placeholder="Zip" value="<%=user.getZip()%>" required>
+            <input type="number" class="form-control" id="zip" placeholder="Zip" value="<%=user.getZip()%>" required>
           </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit Form" />
-      </form>
+        <input type="submit" class="btn btn-primary" value="Submit Form" id="submitBtn" />
     </div>
 
 
         <script src="./myJs.js"></script>
+        <script src="./jqueryCdn.js"></script>
+
+        <script>
+         $(document).ready(()=>{
+        $("#submitBtn").click(()=>{
+            let fname=$("#fname").val();
+            let lname=$("#lname").val();
+            let username=$("#username").val();
+            let password=$("#password").val();
+            let confirmPassword=$("#confirmPassword").val();
+            let city=$("#city").val();
+            let state=$("#state").val();
+            let zip=$("#zip").val();
+
+          $.ajax({
+            method:"POST",
+            url:"UpdateChecker",
+            data:{
+                fname:fname,
+                lname:lname,
+                username:username,
+                password:password,
+                confirmPassword:confirmPassword,
+                city:city,
+                state:state,
+                zip:zip
+            },
+            success:function(data){
+              if(data == "Success"){
+                alert("Update Successful");
+              }
+              else{
+                alert("Updation Failed You can Try again...");
+              }
+            }
+          });
+        });
+      });
+        </script>
     <script src="jquery1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="jquery2.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

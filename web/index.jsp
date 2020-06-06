@@ -14,6 +14,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./myCss.css">
     </head>
+
     <body>
         <%
             String username = (String)session.getAttribute("username");
@@ -29,10 +30,12 @@
             <a href="login.html">Login</a>
             <a href="javascript:void(0)" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
         </div>
-        <h1> Hello <%=username%></h1>
-        <a href="logout.jsp">Logout</a>
+        <div class="container">
+        <h1 > Hello <%=username%></h1>
+        <a href="logout.jsp"><button class="btn btn-primary">Logout</button></a>
         
-        <a href="update.jsp">Update</a>
+        <a href="update.jsp"><button class="btn btn-danger" >Update</button></a>
+        </div>
         <script src="./myJs.js"></script>
     </body>
 </html>

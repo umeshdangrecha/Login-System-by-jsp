@@ -27,15 +27,14 @@
     <div class="container mt-5">
       
 
-    <form class="needs-validation" method="POST" action="registrationChecker">
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label for="validationTooltip01">First name</label>
-            <input type="text" class="form-control" name="fname"  placeholder="First name" required>
+            <input type="text" class="form-control" id="fname"  placeholder="First name" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="validationTooltip02">Last name</label>
-            <input type="text" class="form-control" name="lname" placeholder="Last name"  required>
+            <input type="text" class="form-control" id="lname" placeholder="Last name"  required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="validationTooltipUsername">Username</label>
@@ -43,38 +42,85 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
               </div>
-              <input type="text" class="form-control" name="username" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+              <input type="text" class="form-control" id="username" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
             </div>
           </div>
         </div>
         <div class="form-row">
            <div class="col-md-6 mb-3">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password"  required>
+            <input type="password" class="form-control" id="password" placeholder="Password"  required>
           </div>
             <div class="col-md-6 mb-3">
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"  required>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"  required>
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-6 mb-3">
             <label for="validationTooltip03">City</label>
-            <input type="text" class="form-control" name="city" placeholder="City" required>
+            <input type="text" class="form-control" id="city" placeholder="City" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="validationTooltip04">State</label>
-            <input type="text" class="form-control" name="state" placeholder="State" required>
+            <input type="text" class="form-control" id="state" placeholder="State" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="validationTooltip05">Zip</label>
-            <input type="number" class="form-control" name="zip" placeholder="Zip" required>
+            <input type="number" class="form-control" id="zip" placeholder="Zip" required>
           </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit Form" />
-      </form>
+        <input type="submit" class="btn btn-primary" value="Submit Form" id="submitBtn" />
     </div>
     <script src="./myJs.js"></script>
+    <script src="./jqueryCdn.js"></script>
+    <script>
+
+      $(document).ready(()=>{
+
+        $("#submitBtn").click(()=>{
+            let fname=$("#fname").val();
+            let lname=$("#lname").val();
+            let username=$("#username").val();
+            let password=$("#password").val();
+            let confirmPassword=$("#confirmPassword").val();
+            let city=$("#city").val();
+            let state=$("#state").val();
+            let zip=$("#zip").val();
+
+          $.ajax({
+            method:"POST",
+            url:"registrationChecker",
+            data:{
+                fname:fname,
+                lname:lname,
+                username:username,
+                password:password,
+                confirmPassword:confirmPassword,
+                city:city,
+                state:state,
+                zip:zip
+            },
+            success:function(data){
+              if(data == "Success"){
+                alert("Registration Successful You can Login Now...");
+                $("#fname").val("");
+                $("#lname").val("");
+                $("#username").val("");
+                $("#password").val("");
+                $("#confirmPassword").val("");
+                $("#city").val("");
+                $("#state").val("");
+                $("#zip").val("");
+              }
+              else{
+                alert("Registration Failed You can Try again...");
+              }
+            }
+          });
+        });
+      });
+    </script>
     <script src="jquery1.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="jquery2.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
