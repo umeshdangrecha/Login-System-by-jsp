@@ -52,7 +52,13 @@
                         password:password
                     },
                     success:function(data){
-                        alert(data);
+                        data = data.trim();
+                        if(data == "success"){
+                            window.location ="index.jsp";
+                        }
+                        else{
+                            alert("Login Failed...")
+                        }
                     }
                 });
             });

@@ -79,8 +79,8 @@
             for(i = 1; i < len;i++){
                 let td = tr[i].getElementsByTagName("td");
                 let a = td[1].innerHTML+" "+td[2].innerHTML;
-                console.log(a.toUpperCase().indexOf(searchText));
-                if(a.toUpperCase().indexOf(searchText) >-1){
+                a = a.substring(0,searchText.length);
+                if(a == searchText){
                     tr[i].style.display="";
                 }
                 else{

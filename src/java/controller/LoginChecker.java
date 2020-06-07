@@ -32,7 +32,8 @@ public class LoginChecker extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("username", username);
             session.setAttribute("id", id);
-            resp.sendRedirect("index.jsp");
+//            resp.sendRedirect("index.jsp");
+out.write("success");
         }
         else{
             out.write("Login Failed");
